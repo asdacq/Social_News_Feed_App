@@ -14,8 +14,18 @@
     border: 2px solid black;
     box-shadow: 2px 2px 2px black;
     background: yellow;
+    height: 200px;
+    width: 400px;
 }
 
 body{
-    background: red;
+    background: white;
+}
+
+.nothing{
+    background: white;
+}
+
+.changeRed{
+    color: red;
 }
