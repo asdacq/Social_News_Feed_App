@@ -18,11 +18,7 @@ import red from '@material-ui/core/colors/red';
 var test = [];
 test.push({greeting: "Hello"});
 
-
-const cards = [];
-cards.push({image: "./pepe.png", caption: "Make America Great Again", author: "TrumpFan101"});
-cards.push({image: "./doge.jpg", caption: "Such awesome, very wow, so goodness", author: "goodboy"});
-cards.push({image: "./knuckles.jpg", caption: "Do u knoe da way", author: "Kony2012"});
+let load = true;
 
 
 const styles = {
@@ -42,7 +38,6 @@ class App extends Component {
         super();
         this.state = {
             cards: [],
-            color: "#696969",
         }
     }
     
@@ -58,48 +53,59 @@ class App extends Component {
         this.changeColor(this.state.color === "red" ? "#696969" : "red");
     }
     
-    test = () =>{
-        this.setState( { "color" : this.state.color === "red" ? "#696969" : "red"} );
+    test = (i, event) =>{
+        const index = i;
+        let updatedList = this.state.cards;
+        updatedList[index].color = !updatedList[index].color;
+        console.log(updatedList[index].color)
+        this.setState({
+            cards: updatedList
+        })
     }
     
     
   render() {
-    return (
-      <div className="App">
-            <div className = "border">
-                <img className = "image" src = {pepe} alt = "pepe"></img>
-                <p>{cards[0].author}</p>
-                <p>{cards[0].caption}</p>
-            </div>
-            <div className = "border">
-                <img className = "image" src = {doge} alt = "doge"></img>
-                <p>{cards[1].author}</p>
-                <p>{cards[1].caption}</p>
-            </div>
-            <div className = "border">
-                <div className = "rearrange">
-                <img className = "image" src = {knuckles} alt = "knuckles"></img>
-                <p>{cards[2].author}</p>
-                <div className = "right">
-                <p>{cards[2].caption}</p>
-                </div>
-                </div>
-            </div>
-            <Card style = {styles.card}>
-                <CardMedia image = {pepe} title = "pepe" style = {styles.media}/>
+    if(load){
+        this.state.cards.push({image: pepe, caption: "Make America Great Again", author: "TrumpFan101", color: true});
+        this.state.cards.push({image: doge, caption: "Such awesome, very wow, so goodness", author: "goodboy", color: true});
+        this.state.cards.push({image: knuckles, caption: "Do u knoe da way", author: "Kony2012", color: true});
+        load = false;
+    }
+    const list = this.state.cards;
+    const posts = list.map((items, i) => {
+
+    return(
+        <li key={i}>
+
+        <Card style = {styles.card}>
+                <CardMedia image = {this.state.cards[i].image} style = {styles.media}/>
                 <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
-                        {cards[0].author}
+                        {this.state.cards[i].author}
                     </Typography>
                     <hr></hr>
                     <Typography component="p">
-                        Make America Great Again!
+                        {this.state.cards[i].caption}
                     </Typography>
                     <IconButton aria-label="Add to favorites"  >
-                        <FavoriteIcon onClick={this.test.bind(this)}  style={{color: this.state.color}} />
+                        <FavoriteIcon onClick={this.test.bind(this, i)}
+                        className={(this.state.cards[i].color) ? "changeNull" : "changeRed"}/>
                     </IconButton>
                 </CardContent>
-            </Card>
+        </Card>
+
+
+
+        </li>
+      )
+    })
+
+    return (
+      <div className="App">
+            <h1>Redit?</h1>
+            <ul>
+                {posts}
+            </ul>
       </div>
     );
   }

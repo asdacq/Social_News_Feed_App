@@ -29,3 +29,15 @@ body{
 .changeRed{
     color: red;
 }
+
+.changeNull{
+    color: #696969;
+}
+
+card {
+    align: center;
+}
+
+li {
+    list-style-type: none;
+}
