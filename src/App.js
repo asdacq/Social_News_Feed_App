@@ -76,8 +76,7 @@ class App extends Component {
 
     return(
         <li key={i}>
-
-        <Card style = {styles.card}>
+            <Card style = {styles.card} className={"card"}>
                 <CardMedia image = {this.state.cards[i].image} style = {styles.media}/>
                 <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
@@ -92,10 +91,7 @@ class App extends Component {
                         className={(this.state.cards[i].color) ? "changeNull" : "changeRed"}/>
                     </IconButton>
                 </CardContent>
-        </Card>
-
-
-
+            </Card>
         </li>
       )
     })

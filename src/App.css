@@ -34,8 +34,10 @@ body{
     color: #696969;
 }
 
-card {
-    align: center;
+.card {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 li {
